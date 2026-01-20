@@ -458,3 +458,160 @@ p.subtitle {
     font-size: 0.75rem;
     font-weight: 600;
 }
+
+/* --- Advanced Assistant UI Styles --- */
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: var(--color-text-main);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    font-size: 0.9rem;
+    font-weight: 500;
+    z-index: 1000;
+    animation: slideUpFade 0.3s ease-out;
+}
+
+@keyframes slideUpFade {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+}
+
+.modal-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: white;
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 600px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    transform: scale(0.95);
+    transition: transform 0.2s;
+}
+
+.modal-overlay.open .modal-content {
+    transform: scale(1);
+}
+
+/* Side Panel (Chat) */
+.side-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 400px;
+    background: white;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.05);
+    z-index: 400;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.side-panel.open {
+    transform: translateX(0);
+}
+
+/* Selection Cards (Mode) */
+.selection-card {
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--color-surface);
+}
+
+.selection-card:hover {
+    border-color: var(--color-primary-light);
+    background: var(--color-bg);
+}
+
+.selection-card.selected {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+}
+
+/* Approval List Animations */
+.approval-item {
+    transition: all 0.3s ease;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.approval-item.removing {
+    opacity: 0;
+    transform: translateX(20px);
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.progress-bar-segment {
+    transition: width 0.5s ease-out;
+}
+
+/* Dashboard Split Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    /* Fixed Width Left, Flexible Right */
+    gap: 1.5rem;
+    height: calc(100vh - 200px);
+    /* Fill remaining viewport height approx */
+    min-height: 500px;
+}
+
+.dash-col-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-col-right {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    /* Fix flex overflow issues */
+}
+
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+}
